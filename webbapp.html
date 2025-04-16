@@ -1,239 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head> 
-  <a href= "index.html" > Resume Page </a>
-  <br>
-  <a href = "scratch.html" > Philippines </a>
-  </head>
-<head>
-  <meta charset="UTF-8">
-  <title>Code Guesser Game</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      background: #f0f0f0;
-      padding: 20px;
-    }
+<head> 
+    <meta charset="UTF-8">
+    <title>Code Guesser Game</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background: #f0f0f0;
+            padding: 20px;
+        }
 
-    h1 {
-      color: #333;
-    }
+        h1 {
+            color: #333;
+        }
 
-    .color-options, .current-guess, .guesses {
-      margin: 20px 0;
-    }
+        .color-options, .current-guess, .guesses {
+            margin: 20px 0;
+        }
 
-    .color {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 5px;
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
+        .color {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
 
-    .current-guess .color {
-      border: 2px solid #555;
-    }
+        .current-guess .color {
+            border: 2px solid #555;
+        }
 
-    .guess-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+        .guess-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-    .hint {
-      margin-left: 15px;
-      font-size: 0.95em;
-      color: #444;
-    }
+        .hint {
+            margin-left: 15px;
+            font-size: 0.95em;
+            color: #444;
+        }
 
-    .message {
-      font-size: 1.2em;
-      color: green;
-    }
+        .message {
+            font-size: 1.2em;
+            color: green;
+        }
 
-    .game-over {
-      color: red;
-    }
+        .game-over {
+            color: red;
+        }
 
-    button {
-      margin: 10px 5px;
-      padding: 8px 16px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-  </style>
+        button {
+            margin: 10px 5px;
+            padding: 8px 16px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Code Guesser Game</h1>
-  <p>Select 4 colors in the correct order</p>
+    <a href="index.html">Resume Page</a>
+    <br>
+    <a href="scratch.html">Philippines</a>
 
-  <div class="color-options" id="colorOptions"></div>
+    <h1>Code Guesser Game</h1>
+    <p>Select 4 colors in the correct order</p>
 
-  <div class="current-guess" id="currentGuess"></div>
-  <button id="submitBtn" onclick="submitGuess()">Submit Guess</button>
-  <button onclick="resetGame()">Play Again</button>
-  <button id="hintBtn" onclick="giveHint()">Get Hint</button>
+    <div class="color-options" id="colorOptions"></div>
 
-  <div class="guesses" id="guessHistory"></div>
+    <div class="current-guess" id="currentGuess"></div>
+    <button id="submitBtn" onclick="submitGuess()">Submit Guess</button>
+    <button onclick="resetGame()">Play Again</button>
+    <button id="hintBtn" onclick="giveHint()">Get Hint</button>
 
-  <p class="message" id="message"></p>
+    <div class="guesses" id="guessHistory"></div>
 
-  <script>
-    const colors = ['red', 'blue', 'green', 'yellow'];
-    let secretCode = [];
-    let currentGuess = [];
-    let guessCount = 0;
-    const maxGuesses = 10;
-    let hintUsed = false;
+    <p class="message" id="message"></p>
 
-    function shuffleColors() {
-      secretCode = [];
-      for (let i = 0; i < 4; i++) {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        secretCode.push(randomColor);
-      }
-      console.log("Secret Code (debug):", secretCode); // Hide this for live play
-    }
+    <script>
+        const colors = ['red', 'blue', 'green', 'yellow'];
+        let secretCode = [];
+        let currentGuess = [];
+        let guessCount = 0;
+        const maxGuesses = 10;
+        let hintUsed = false;
 
-    function renderColorOptions() {
-      const container = document.getElementById('colorOptions');
-      container.innerHTML = '';
-      colors.forEach(color => {
-        const div = document.createElement('div');
-        div.className = 'color';
-        div.style.backgroundColor = color;
-        div.onclick = () => addColorToGuess(color);
-        container.appendChild(div);
-      });
-    }
-
-    function addColorToGuess(color) {
-      if (currentGuess.length >= 4 || guessCount >= maxGuesses) return;
-      currentGuess.push(color);
-      renderCurrentGuess();
-    }
-
-    function renderCurrentGuess() {
-      const container = document.getElementById('currentGuess');
-      container.innerHTML = '';
-      currentGuess.forEach(color => {
-        const div = document.createElement('div');
-        div.className = 'color';
-        div.style.backgroundColor = color;
-        container.appendChild(div);
-      });
-    }
-
-    function getHints(guess, code) {
-      let correctPos = 0;
-      let correctColor = 0;
-      const codeCopy = [...code];
-      const guessCopy = [...guess];
-
-      // Exact matches
-      for (let i = 0; i < 4; i++) {
-        if (guessCopy[i] === codeCopy[i]) {
-          correctPos++;
-          guessCopy[i] = null;
-          codeCopy[i] = null;
+        function shuffleColors() {
+            secretCode = [];
+            while (secretCode.length < 4) {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                if (!secretCode.includes(randomColor)) {
+                    secretCode.push(randomColor);
+                }
+            }
+            console.log("Secret Code (debug):", secretCode); // Remove for live play
         }
-      }
 
-      // Color-only matches
-      for (let i = 0; i < 4; i++) {
-        if (guessCopy[i]) {
-          const index = codeCopy.indexOf(guessCopy[i]);
-          if (index !== -1) {
-            correctColor++;
-            codeCopy[index] = null;
-          }
+        function renderColorOptions() {
+            const container = document.getElementById('colorOptions');
+            container.innerHTML = '';
+            colors.forEach(color => {
+                const div = document.createElement('div');
+                div.className = 'color';
+                div.style.backgroundColor = color;
+                div.onclick = () => addColorToGuess(color);
+                container.appendChild(div);
+            });
         }
-      }
 
-      return { correctPos, correctColor };
-    }
+        function addColorToGuess(color) {
+            if (currentGuess.length >= 4 || guessCount >= maxGuesses) return;
+            currentGuess.push(color);
+            renderCurrentGuess();
+        }
 
-    function submitGuess() {
-      if (currentGuess.length !== 4) {
-        alert("Please select 4 colors.");
-        return;
-      }
+        function renderCurrentGuess() {
+            const container = document.getElementById('currentGuess');
+            container.innerHTML = '';
+            currentGuess.forEach(color => {
+                const div = document.createElement('div');
+                div.className = 'color';
+                div.style.backgroundColor = color;
+                container.appendChild(div);
+            });
+        }
 
-      if (guessCount >= maxGuesses) return;
+        function getHints(guess, code) {
+            let correctPos = 0;
+            let correctColor = 0;
+            const codeCopy = [...code];
+            const guessCopy = [...guess];
 
-      guessCount++;
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i] === codeCopy[i]) {
+                    correctPos++;
+                    guessCopy[i] = null;
+                    codeCopy[i] = null;
+                }
+            }
 
-      const { correctPos, correctColor } = getHints(currentGuess, secretCode);
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i]) {
+                    const index = codeCopy.indexOf(guessCopy[i]);
+                    if (index !== -1) {
+                        correctColor++;
+                        codeCopy[index] = null;
+                    }
+                }
+            }
 
-      const history = document.getElementById('guessHistory');
-      const row = document.createElement('div');
-      row.className = 'guess-row';
+            return { correctPos, correctColor };
+        }
 
-      currentGuess.forEach(color => {
-        const div = document.createElement('div');
-        div.className = 'color';
-        div.style.backgroundColor = color;
-        row.appendChild(div);
-      });
+        function submitGuess() {
+            if (currentGuess.length !== 4) {
+                alert("Please select 4 colors.");
+                return;
+            }
 
-      const hint = document.createElement('div');
-      hint.className = 'hint';
-      hint.textContent = `✅ ${correctPos} correct position(s), 🎨 ${correctColor} correct color(s)`;
-      row.appendChild(hint);
-      history.appendChild(row);
+            if (guessCount >= maxGuesses) return;
 
-      if (correctPos === 4) {
-        document.getElementById('message').textContent = "🎉 You cracked the code!";
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('hintBtn').disabled = true;
-      } else if (guessCount >= maxGuesses) {
-        document.getElementById('message').innerHTML = `😢 Game over! The code was: <b>${secretCode.join(', ')}</b>`;
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('hintBtn').disabled = true;
-      } else {
-        document.getElementById('message').textContent = "";
-      }
+            guessCount++;
 
-      currentGuess = [];
-      renderCurrentGuess();
-    }
+            const { correctPos, correctColor } = getHints(currentGuess, secretCode);
 
-    function giveHint() {
-      if (hintUsed) {
-        alert("You've already used your hint!");
-        return;
-      }
+            const history = document.getElementById('guessHistory');
+            const row = document.createElement('div');
+            row.className = 'guess-row';
 
-      hintUsed = true;
-      document.getElementById('hintBtn').disabled = true;
+            currentGuess.forEach(color => {
+                const div = document.createElement('div');
+                div.className = 'color';
+                div.style.backgroundColor = color;
+                row.appendChild(div);
+            });
 
-      const index = Math.floor(Math.random() * 4);
-      const color = secretCode[index];
-      document.getElementById('message').textContent = `💡 Hint: Color at position ${index + 1} is "${color}".`;
-    }
+            const hint = document.createElement('div');
+            hint.className = 'hint';
+            hint.textContent = `✅ ${correctPos} correct position(s), 🎨 ${correctColor} correct color(s)`;
+            row.appendChild(hint);
+            history.appendChild(row);
 
-    function resetGame() {
-      currentGuess = [];
-      secretCode = [];
-      guessCount = 0;
-      hintUsed = false;
-      document.getElementById('currentGuess').innerHTML = '';
-      document.getElementById('guessHistory').innerHTML = '';
-      document.getElementById('message').textContent = '';
-      document.getElementById('submitBtn').disabled = false;
-      document.getElementById('hintBtn').disabled = false;
-      shuffleColors();
-      renderColorOptions();
-    }
+            if (correctPos === 4) {
+                document.getElementById('message').textContent = "🎉 You cracked the code!";
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('hintBtn').disabled = true;
+            } else if (guessCount >= maxGuesses) {
+                document.getElementById('message').innerHTML = `😢 Game over! The code was: <b>${secretCode.join(', ')}</b>`;
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('hintBtn').disabled = true;
+            } else {
+                document.getElementById('message').textContent = "";
+            }
 
-    // Start game
-    resetGame();
-  </script>
+            currentGuess = [];
+            renderCurrentGuess();
+        }
+
+        function giveHint() {
+            if (hintUsed) {
+                alert("You've already used your hint!");
+                return;
+            }
+
+            hintUsed = true;
+            document.getElementById('hintBtn').disabled = true;
+
+            const index = Math.floor(Math.random() * 4);
+            const color = secretCode[index];
+            document.getElementById('message').textContent = `💡 Hint: Color at position ${index + 1} is "${color}".`;
+        }
+
+        function resetGame() {
+            currentGuess = [];
+            secretCode = [];
+            guessCount = 0;
+            hintUsed = false;
+            document.getElementById('currentGuess').innerHTML = '';
+            document.getElementById('guessHistory').innerHTML = '';
+            document.getElementById('message').textContent = '';
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('hintBtn').disabled = false;
+            shuffleColors();
+            renderColorOptions();
+        }
+
+        resetGame();
+    </script>
+
 </body>
 </html>
