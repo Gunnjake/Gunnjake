@@ -1,0 +1,97 @@
+/* Base page styling */
+body {
+    background-color: whitesmoke;
+    color: #0038A8; /* Blue text */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header Styles */
+h1 {
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #CE1126; /* Red */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 30px;
+}
+
+h4 {
+    color: #0038A8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Emphasized custom class */
+.emphasizedText {
+    color: #FCD116;
+    font-weight: bold;
+}
+
+/* General paragraph style */
+p {
+    color: #0038A8;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+/* List wrapper to center block but preserve bullet structure */
+.list-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Styling lists properly */
+.list-container ol,
+.list-container ul {
+    text-align: left;
+    list-style-position: outside;
+    padding-left: 20px;
+}
+
+/* Sublist spacing */
+li ul,
+li ol {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* ========== Custom Div Containers ========== */
+
+/* Content wrapper for sections like provinces, numbers, etc. */
+
+
+.content-block1 {
+    border: 1px solid #0038A8;
+    padding: 20px;
+    margin: auto;
+    width: auto;
+    max-width: 560px;
+    background-color: #f0f4ff;
+    border-radius: 8px;
+}
+
+
+/* Header banner or top section */
+.header-banner {
+    background-color: #0038A8;
+    color: white;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+/* Footer section */
+.footer {
+    background-color: #0038A8;
+    color: white;
+    padding: 15px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
