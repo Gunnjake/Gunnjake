@@ -1,0 +1,79 @@
+b/*
+// =============================================
+// Custom Styles & Improvements
+// =============================================
+*/
+
+/* Main Content Area */
+main {
+    padding-top: 3rem; /* Add some space below the header */
+}
+
+/* Image styling */
+.img-fluid {
+    border-radius: 8px; /* Softer, rounded corners for images */
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.caption {
+    font-size: 0.8rem;
+}
+
+/* Improved List of Letters in Main Content */
+.letter-list li {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.letter-list li a {
+    text-decoration: none;
+    color: #0085A1; /* A nice teal color from the original template */
+    transition: all 0.2s ease-in-out;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: block; /* Makes the whole area clickable */
+}
+
+.letter-list li a:hover {
+    color: #fff;
+    background-color: #0085A1;
+    transform: translateX(5px);
+}
+
+
+/* Footer Enhancements */
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+footer .list-inline-item a {
+    transition: color 0.2s ease-in-out;
+}
+
+footer .list-inline-item a:hover .fa-stack-2x {
+    color: #0085A1; /* Highlight color on hover */
+}
+
+/* Back to Top Link */
+footer a[href="#page-top"] {
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+footer a[href="#page-top"]:hover {
+    color: #0085A1;
+}
+
+/* General Typography improvements */
+p {
+    line-height: 1.7;
+}
+
+/* Ensure navbar-brand is visible if you add it */
+.navbar-brand {
+    font-weight: 800;
+}
